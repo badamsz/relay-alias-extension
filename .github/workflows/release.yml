@@ -1,0 +1,47 @@
+name: Release
+
+# Trigger by pushing a tag like v1.0.0:
+#   git tag v1.0.1
+#   git push origin v1.0.1
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read version from manifest.json
+        id: manifest
+        run: |
+          VERSION=$(node -p "require('./manifest.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Sanity check tag matches manifest version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          if [ "$TAG" != "${{ steps.manifest.outputs.version }}" ]; then
+            echo "::warning::Tag v$TAG does not match manifest.json version ${{ steps.manifest.outputs.version }}"
+          fi
+
+      - name: Zip extension
+        run: |
+          mkdir -p dist
+          zip -r "dist/relay-alias-extension-${GITHUB_REF_NAME}.zip" . \
+            -x "dist/*" \
+            -x ".git/*" \
+            -x ".github/*" \
+            -x "*.DS_Store"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/relay-alias-extension-${{ github.ref_name }}.zip
+          generate_release_notes: true
