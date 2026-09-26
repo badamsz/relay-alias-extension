@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Relay Aliases — Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="wrap">
+    <h1>Relay Aliases — Settings</h1>
+
+    <p>
+      This extension talks directly to
+      <a href="https://relay.firefox.com" target="_blank" rel="noopener">relay.firefox.com</a>
+      using your account's API key. The key is stored only in this browser
+      (<code>chrome.storage.local</code>) and is never sent anywhere except
+      Mozilla's Relay API.
+    </p>
+
+    <ol>
+      <li>Sign in at <a href="https://relay.firefox.com" target="_blank" rel="noopener">relay.firefox.com</a>.</li>
+      <li>Click your profile icon (top right) → <strong>Settings</strong>.</li>
+      <li>Copy the value shown under <strong>API key</strong>.</li>
+      <li>Paste it below and click Save.</li>
+    </ol>
+
+    <label for="apiKeyInput">API key</label>
+    <div class="key-row">
+      <input id="apiKeyInput" type="password" autocomplete="off" placeholder="Paste your Relay API key" />
+      <button id="toggleVisibility" type="button" title="Show/hide">👁</button>
+    </div>
+
+    <div class="actions">
+      <button id="saveBtn" class="primary-btn">Save</button>
+      <button id="clearBtn" class="secondary-btn">Remove key</button>
+      <span id="status" class="status"></span>
+    </div>
+
+    <hr />
+    <p class="muted">
+      Right-click any text field on a page and choose
+      “Insert a new Relay email mask here” to generate and fill in a mask
+      without opening the popup.
+    </p>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

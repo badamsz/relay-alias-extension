@@ -1,0 +1,51 @@
+.relay-inline-icon {
+  position: absolute;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a3b78;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+}
+
+.relay-inline-icon:hover {
+  background: #f4f1fb;
+  border-color: #6f5aab;
+}
+
+.relay-inline-icon.relay-loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+#relay-ext-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483647;
+  background: #1d1133;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+  max-width: 320px;
+}
+
+#relay-ext-toast.relay-toast-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#relay-ext-toast.relay-toast-hide {
+  opacity: 0;
+}
